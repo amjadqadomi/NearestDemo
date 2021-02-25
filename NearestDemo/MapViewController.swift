@@ -179,8 +179,8 @@ class MapViewController: UIViewController {
 
         
         for placeData in placesData {
-            let mapAnnotationObject = MapAnnotationObject.init(title: placeData.title, coordinate: CLLocationCoordinate2D(latitude: placeData.latitude, longitude: placeData.longitude), distance: Int(placeData.distance), rating: placeData.averageRating, openingHours: placeData.openingHours, phone: placeData.phoneNumber)
-            self.mapView.addAnnotation(mapAnnotationObject)
+            let placeAnnotationObject = PlaceAnnotationObject.init(title: placeData.title, coordinate: CLLocationCoordinate2D(latitude: placeData.latitude, longitude: placeData.longitude), distance: Int(placeData.distance), rating: placeData.averageRating, openingHours: placeData.openingHours, phone: placeData.phoneNumber)
+            self.mapView.addAnnotation(placeAnnotationObject)
         }
     }
     
@@ -193,8 +193,8 @@ class MapViewController: UIViewController {
         for item in items {
             if let longitude = item.coordinates?.longitude, let latitude = item.coordinates?.latitude, let title = item.title, let id = item.id, let coordinates = item.coordinates {
                
-                let mapAnnotationObject = MapAnnotationObject.init(title: title, coordinate: coordinates, distance: item.distance, rating:  item.averageRating, openingHours: item.openingHours?.text, phone: item.contacts?.phone?.first?.value)
-                self.mapView.addAnnotation(mapAnnotationObject)
+                let placeAnnotationObject = PlaceAnnotationObject.init(title: title, coordinate: coordinates, distance: item.distance, rating:  item.averageRating, openingHours: item.openingHours?.text, phone: item.contacts?.phone?.first?.value)
+                self.mapView.addAnnotation(placeAnnotationObject)
                 
                 var placesAlternativeNames = [PlaceAlternativeNameLocalDBAdapter]()
                 if let alternativeNames = item.alternativeNames {
@@ -226,8 +226,8 @@ extension MapViewController: CLLocationManagerDelegate {
 
 extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if let annotation = annotation as? MapAnnotationObject {
-            let identifier = String(describing: MapAnnotationObject.self)
+        if let annotation = annotation as? PlaceAnnotationObject {
+            let identifier = String(describing: PlaceAnnotationObject.self)
             
             var view: MKMarkerAnnotationView
             if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView {
@@ -252,7 +252,7 @@ extension MapViewController: MKMapViewDelegate {
             return view
         }
         
-        let identifier = String(describing: MapAnnotationObject.self)
+        let identifier = String(describing: PlaceAnnotationObject.self)
         
         var view: MKMarkerAnnotationView
         if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView {
@@ -269,12 +269,12 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        if let annotation = view.annotation as? MapAnnotationObject {
+        if let annotation = view.annotation as? PlaceAnnotationObject {
             let vc = PlaceDetailsViewControlelr.instantiate(fromAppStoryboard: .Main)
             vc.modalTransitionStyle = .crossDissolve
             vc.modalPresentationStyle = .overFullScreen
             self.present(vc, animated: true, completion: nil)
-            vc.mapAnnotationObject = annotation
+            vc.placeAnnotationObject = annotation
         } else if (view.annotation as? UserLocationMapAnnotationObject) != nil {
             return
         }

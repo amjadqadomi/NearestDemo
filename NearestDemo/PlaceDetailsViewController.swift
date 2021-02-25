@@ -24,12 +24,12 @@ class PlaceDetailsViewControlelr: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    var mapAnnotationObject: MapAnnotationObject?  = nil {
+    var placeAnnotationObject: PlaceAnnotationObject?  = nil {
         didSet {
-            guard let mapAnnotationObject = mapAnnotationObject else {
+            guard let placeAnnotationObject = placeAnnotationObject else {
                 return
             }
-            updateUI(mapAnnotationObject: mapAnnotationObject)
+            updateUI(placeAnnotationObject: placeAnnotationObject)
         }
     }
 
@@ -39,16 +39,16 @@ class PlaceDetailsViewControlelr: UIViewController {
         initUI()
     }
     
-    func updateUI(mapAnnotationObject: MapAnnotationObject) {
-        nameLabel.text = mapAnnotationObject.title
-        distanceLabel.text = String(format:"%@: %d", "distanceLabel".localized, mapAnnotationObject.distance ?? 0)
-        if (mapAnnotationObject.rating == nil || mapAnnotationObject.rating == 0) {
+    func updateUI(placeAnnotationObject: PlaceAnnotationObject) {
+        nameLabel.text = placeAnnotationObject.title
+        distanceLabel.text = String(format:"%@: %d", "distanceLabel".localized, placeAnnotationObject.distance ?? 0)
+        if (placeAnnotationObject.rating == nil || placeAnnotationObject.rating == 0) {
             ratingLabel.isHidden = true
         }else {
-            ratingLabel.text = String(format:"%@: %.1f", "ratingLabel".localized, mapAnnotationObject.rating ?? 0.0)
+            ratingLabel.text = String(format:"%@: %.1f", "ratingLabel".localized, placeAnnotationObject.rating ?? 0.0)
         }
-        openingHoursLabel.text = String(format: "%@: %@", "openingHoursLabel".localized, mapAnnotationObject.openingHours ?? "")
-        phoneLabel.text = String(format: "%@: %@", "phoneNumberLabel".localized, mapAnnotationObject.phone ?? "")
+        openingHoursLabel.text = String(format: "%@: %@", "openingHoursLabel".localized, placeAnnotationObject.openingHours ?? "")
+        phoneLabel.text = String(format: "%@: %@", "phoneNumberLabel".localized, placeAnnotationObject.phone ?? "")
     }
     
     func initUI() {

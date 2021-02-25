@@ -24,7 +24,7 @@
 		959EBC3725E6EFE600708C66 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 959EBC3925E6EFE600708C66 /* Localizable.strings */; };
 		959EBC4225E6F1B400708C66 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959EBC4125E6F1B400708C66 /* Extensions.swift */; };
 		959EBC6125E786B700708C66 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959EBC6025E786B700708C66 /* Resources.swift */; };
-		959EBC6625E78AF000708C66 /* MapAnnotationObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959EBC6525E78AF000708C66 /* MapAnnotationObject.swift */; };
+		959EBC6625E78AF000708C66 /* PlaceAnnotationObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959EBC6525E78AF000708C66 /* PlaceAnnotationObject.swift */; };
 		959EBC7625E7AE6900708C66 /* PlaceDataLocalDBAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959EBC7525E7AE6900708C66 /* PlaceDataLocalDBAdapter.swift */; };
 		959EBC7C25E7B46F00708C66 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 959EBC7A25E7B46F00708C66 /* Model.xcdatamodeld */; };
 		959EBC8125E7B5A100708C66 /* CoreDataUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959EBC8025E7B5A100708C66 /* CoreDataUtils.swift */; };
@@ -77,7 +77,7 @@
 		959EBC3D25E6EFE800708C66 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		959EBC4125E6F1B400708C66 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		959EBC6025E786B700708C66 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
-		959EBC6525E78AF000708C66 /* MapAnnotationObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationObject.swift; sourceTree = "<group>"; };
+		959EBC6525E78AF000708C66 /* PlaceAnnotationObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAnnotationObject.swift; sourceTree = "<group>"; };
 		959EBC7525E7AE6900708C66 /* PlaceDataLocalDBAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDataLocalDBAdapter.swift; sourceTree = "<group>"; };
 		959EBC7B25E7B46F00708C66 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		959EBC8025E7B5A100708C66 /* CoreDataUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataUtils.swift; sourceTree = "<group>"; };
@@ -232,7 +232,7 @@
 			children = (
 				959EBC7525E7AE6900708C66 /* PlaceDataLocalDBAdapter.swift */,
 				959EBC1C25E6E84E00708C66 /* LocationObject.swift */,
-				959EBC6525E78AF000708C66 /* MapAnnotationObject.swift */,
+				959EBC6525E78AF000708C66 /* PlaceAnnotationObject.swift */,
 			);
 			path = "Data Classes";
 			sourceTree = "<group>";
@@ -489,7 +489,7 @@
 			files = (
 				959EBC0F25E6E69D00708C66 /* GlobalKeys.swift in Sources */,
 				959EBBD125E6E24600708C66 /* MapViewController.swift in Sources */,
-				959EBC6625E78AF000708C66 /* MapAnnotationObject.swift in Sources */,
+				959EBC6625E78AF000708C66 /* PlaceAnnotationObject.swift in Sources */,
 				959EBC2525E6E8ED00708C66 /* SearchResponse.swift in Sources */,
 				959EBCA125E7E79D00708C66 /* AppStoryBoard.swift in Sources */,
 				959EBC0725E6E61200708C66 /* NetworkUtils.swift in Sources */,
