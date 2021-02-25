@@ -5,3 +5,15 @@
   Created by Amjad on 2/24/21.
   
 */
+"searchButtonTitle" = "Search";
+"searchHere" = "Hotel, Gas, Cafe, etc.";
+"loading" = "Loading";
+"distanceLabel" = "Distance";
+"ratingLabel" = "Rating";
+"openingHoursLabel" = "Hours";
+"phoneNumberLabel" = "Phone";
+"hotel" = "hotel";
+"cafe" = "cafe";
+"gas" = "gas";
+"supermarket" = "supermarket";
+"myLocation" = "My Location";

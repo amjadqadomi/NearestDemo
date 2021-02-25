@@ -5,3 +5,15 @@
   Created by Amjad on 2/24/21.
   
 */
+"searchButtonTitle" = "بحث";
+"searchHere" = "فندق, كازية, مقهى, الخ";
+"loading" = "جاري التحميل";
+"distanceLabel" = "المسافة";
+"ratingLabel" = "التقييم";
+"openingHoursLabel" = "ساعات العمل";
+"phoneNumberLabel" = "الهاتف";
+"hotel" = "فندق";
+"cafe" = "مقهى";
+"gas" = "كازية";
+"supermarket" = "سوبرماركت";
+"myLocation" = "موقعي";

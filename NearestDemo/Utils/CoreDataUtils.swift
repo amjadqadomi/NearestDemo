@@ -15,17 +15,19 @@ class CoreDataUtils {
         let context = appDelegate.persistentContainer.viewContext
         return context
     }
-    class func saveMapItems (items: [StorableMapItemObject]) {
+    class func saveMapItems (items: [PlaceDataLocalDBAdapter]) {
         let managedObjectContext = CoreDataUtils.getManajedObjectContext()
         for item in items {
-            let t = StorableMapItem(context: managedObjectContext)
-            t.title = item.title
-            t.id = item.id
-            t.averageRating = item.averageRating ?? -1
-            t.isOpen = item.isOpen ?? false
-            t.longitude = item.longitude
-            t.latitude = item.latitude
-            t.alternativeNames = item.alternativeNames
+            let placeDataEntity = PlaceDataEntity(context: managedObjectContext)
+            placeDataEntity.title = item.title
+            placeDataEntity.id = item.id
+            placeDataEntity.averageRating = item.averageRating
+            placeDataEntity.openingHours = item.openingHours
+            placeDataEntity.phoneNumber = item.phoneNumber
+            placeDataEntity.longitude = item.longitude
+            placeDataEntity.latitude = item.latitude
+            placeDataEntity.distance = Int32(item.distance)
+            placeDataEntity.alternativeNames = item.alternativeNames
         }
         do {
             try managedObjectContext.save()
@@ -35,8 +37,8 @@ class CoreDataUtils {
         }
     }
     
-    class func getMapItems() {
-        let fetchRequest: NSFetchRequest<StorableMapItem> = StorableMapItem.fetchRequest()
+    class func getMapItems() -> [PlaceDataEntity] {
+        let fetchRequest: NSFetchRequest<PlaceDataEntity> = PlaceDataEntity.fetchRequest()
         fetchRequest.sortDescriptors = []
         
         fetchRequest.predicate = nil
@@ -50,15 +52,14 @@ class CoreDataUtils {
             print("\(fetchError), \(fetchError.localizedDescription)")
         }
         
-        if let fetchedObjects = fetchedResultsController.fetchedObjects as? [StorableMapItem] {
-            for ff in fetchedObjects {
-                print(ff.alternativeNames?.alternativeNames?.last?.language)
-            }
+        if let fetchedObjects = fetchedResultsController.fetchedObjects as? [PlaceDataEntity] {
+            return fetchedObjects
         }
+        return []
     }
     
     class func deleteAllMapItems() {
-        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "StorableMapItem")
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "PlaceDataEntity")
         let request = NSBatchDeleteRequest(fetchRequest: fetch)
 
         do {

@@ -24,3 +24,8 @@ struct WebServiceParameters {
     static let placesAppCodeParameterKey = "app_code"
     static let resultSizeParameterKey = "size"
 }
+
+struct UserDefaultsKeys {
+    static let lastUserLongitudeKey = "lastLong"
+    static let lastUserLatitudeKey = "lastLat"
+}

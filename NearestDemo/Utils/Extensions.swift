@@ -32,12 +32,12 @@ extension UIView {
 }
 
 extension UITextField {
-    func showRedAlertAndShake(textFieldPlaceHolder:String) {
+    func showRedAlertAndShake() {
         self.text = ""
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
         
-        attributedPlaceholder = NSAttributedString(string: textFieldPlaceHolder,
+        attributedPlaceholder = NSAttributedString(string: self.placeholder ?? "",
                                                    attributes: [NSAttributedString.Key.foregroundColor: UIColor(hex: "D0021B")!])
         shake()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {

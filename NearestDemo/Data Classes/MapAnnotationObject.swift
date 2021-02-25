@@ -1,5 +1,5 @@
 //
-//  MapLocations.swift
+//  MapAnnotationObject.swift
 //  NearestDemo
 //
 //  Created by Amjad on 2/25/21.
@@ -8,7 +8,7 @@
 import Foundation
 import MapKit
 
-class MapLocation: NSObject, MKAnnotation {
+class MapAnnotationObject: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
     var title: String?
     var distance: Int?
@@ -28,4 +28,16 @@ class MapLocation: NSObject, MKAnnotation {
     }
     
     
+}
+
+class UserLocationMapAnnotationObject: NSObject, MKAnnotation {
+    var coordinate: CLLocationCoordinate2D
+    var title: String?
+
+    init(title: String?, coordinate: CLLocationCoordinate2D) {
+        self.title = title
+        self.coordinate = coordinate
+        super.init()
+    }
+
 }

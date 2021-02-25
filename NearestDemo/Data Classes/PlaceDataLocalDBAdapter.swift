@@ -1,5 +1,5 @@
 //
-//  StorableMapItemObject.swift
+//  PlaceDataLocalDBAdapter.swift
 //  NearestDemo
 //
 //  Created by Amjad on 2/25/21.
@@ -7,37 +7,39 @@
 
 import Foundation
 
-public class StorableMapItemObject: NSObject, NSCoding {
+public class PlaceDataLocalDBAdapter: NSObject, NSCoding {
     
     public var longitude: Double
     public var latitude: Double
+    public var distance: Int
     public var title: String?
-    public var averageRating: Double?
+    public var averageRating: Double
     public var id: String
-    public var isOpen: Bool?
+    public var phoneNumber: String?
     public var openingHours: String?
-    public var alternativeNames: StorableAlternativeNames?
+    public var alternativeNames: PlaceAlternativeNamesLocalDBAdapter?
 
     
     enum EncodingKeys: String {
         case longitude = "longitude"
         case latitude = "latitude"
+        case distance = "distance"
         case title = "title"
         case averageRating = "averageRating"
         case id = "id"
-        case isOpen = "isOpen"
+        case phoneNumber = "phoneNumber"
         case openingHours = "openingHours"
         case alternativeNames = "alternativeNames"
-
     }
     
     public func encode(with coder: NSCoder) {
         coder.encode(longitude, forKey: EncodingKeys.longitude.rawValue)
         coder.encode(latitude, forKey: EncodingKeys.latitude.rawValue)
+        coder.encode(distance, forKey: EncodingKeys.distance.rawValue)
         coder.encode(title, forKey: EncodingKeys.title.rawValue)
         coder.encode(averageRating, forKey: EncodingKeys.averageRating.rawValue)
         coder.encode(id, forKey: EncodingKeys.id.rawValue)
-        coder.encode(isOpen, forKey: EncodingKeys.isOpen.rawValue)
+        coder.encode(phoneNumber, forKey: EncodingKeys.phoneNumber.rawValue)
         coder.encode(openingHours, forKey: EncodingKeys.openingHours.rawValue)
         coder.encode(alternativeNames, forKey: EncodingKeys.alternativeNames.rawValue)
     }
@@ -45,32 +47,34 @@ public class StorableMapItemObject: NSObject, NSCoding {
     public required convenience init?(coder: NSCoder) {
         let longitude = coder.decodeObject(forKey: EncodingKeys.longitude.rawValue) as! Double
         let latitude = coder.decodeObject(forKey: EncodingKeys.latitude.rawValue) as! Double
+        let distance = coder.decodeObject(forKey: EncodingKeys.distance.rawValue) as! Int
         let title = coder.decodeObject(forKey: EncodingKeys.title.rawValue) as! String
         let averageRating = coder.decodeObject(forKey: EncodingKeys.averageRating.rawValue) as! Double
         let id = coder.decodeObject(forKey: EncodingKeys.id.rawValue) as! String
-        let isOpen = coder.decodeObject(forKey: EncodingKeys.isOpen.rawValue) as! Bool
+        let phoneNumber = coder.decodeObject(forKey: EncodingKeys.phoneNumber.rawValue) as! String
         let openingHours = coder.decodeObject(forKey: EncodingKeys.openingHours.rawValue) as! String
-        let alternativeNames = coder.decodeObject(forKey: EncodingKeys.alternativeNames.rawValue) as! StorableAlternativeNames
+        let alternativeNames = coder.decodeObject(forKey: EncodingKeys.alternativeNames.rawValue) as! PlaceAlternativeNamesLocalDBAdapter
 
 
-        self.init(longitude: longitude, latitude: latitude, title: title, averageRating: averageRating, id: id, isOpen: isOpen, openingHours: openingHours, alternativeNames: alternativeNames)
+        self.init(longitude: longitude, latitude: latitude, distance: distance, title: title, averageRating: averageRating, id: id, phoneNumber: phoneNumber, openingHours: openingHours, alternativeNames: alternativeNames)
     }
     
-    init (longitude: Double, latitude: Double, title: String, averageRating: Double?, id: String, isOpen: Bool?, openingHours: String?, alternativeNames: StorableAlternativeNames?) {
+    init (longitude: Double, latitude: Double, distance: Int ,title: String, averageRating: Double, id: String, phoneNumber: String?, openingHours: String?, alternativeNames: PlaceAlternativeNamesLocalDBAdapter?) {
         self.longitude = longitude
         self.latitude = latitude
+        self.distance = distance
         self.title = title
         self.averageRating = averageRating
         self.id = id
-        self.isOpen = isOpen
+        self.phoneNumber = phoneNumber
         self.openingHours = openingHours
         self.alternativeNames = alternativeNames
     }
     
 }
 
-public class StorableAlternativeNames: NSObject, NSCoding {
-    public var alternativeNames: [StorableAlternativeName]?
+public class PlaceAlternativeNamesLocalDBAdapter: NSObject, NSCoding {
+    public var alternativeNames: [PlaceAlternativeNameLocalDBAdapter]?
     enum EncodingKeys: String {
         case alternativeNames = "alternativeNames"
     }
@@ -79,17 +83,17 @@ public class StorableAlternativeNames: NSObject, NSCoding {
     }
     
     public required convenience init?(coder: NSCoder) {
-        let alternativeNames = coder.decodeObject(forKey: EncodingKeys.alternativeNames.rawValue) as! [StorableAlternativeName]
+        let alternativeNames = coder.decodeObject(forKey: EncodingKeys.alternativeNames.rawValue) as! [PlaceAlternativeNameLocalDBAdapter]
         self.init(alternativeNames: alternativeNames)
     }
     
-    init(alternativeNames: [StorableAlternativeName]?) {
+    init(alternativeNames: [PlaceAlternativeNameLocalDBAdapter]?) {
         self.alternativeNames = alternativeNames
     }
     
 }
 
-public class StorableAlternativeName: NSObject, NSCoding {
+public class PlaceAlternativeNameLocalDBAdapter: NSObject, NSCoding {
     
     public var name: String?
     public var language: String?

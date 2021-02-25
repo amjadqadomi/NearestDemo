@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="20C69" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="StorableMapItem" representedClassName="StorableMapItem" syncable="YES" codeGenerationType="class">
-        <attribute name="alternativeNames" optional="YES" attributeType="Transformable" customClassName="StorableAlternativeNames"/>
+    <entity name="PlaceDataEntity" representedClassName="PlaceDataEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="alternativeNames" optional="YES" attributeType="Transformable" customClassName="PlaceAlternativeNamesLocalDBAdapter"/>
         <attribute name="averageRating" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="distance" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="String"/>
-        <attribute name="isOpen" optional="YES" attributeType="Boolean" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="openingHours" optional="YES" attributeType="String"/>
+        <attribute name="phoneNumber" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="StorableMapItem" positionX="-63" positionY="-18" width="128" height="149"/>
+        <element name="PlaceDataEntity" positionX="-63" positionY="-18" width="128" height="164"/>
     </elements>
 </model>

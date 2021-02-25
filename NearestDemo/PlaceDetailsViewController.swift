@@ -19,25 +19,17 @@ class PlaceDetailsViewControlelr: UIViewController {
     @IBOutlet weak var phoneLabel: UILabel!
     
     @IBOutlet weak var dismissButton : UIButton!
-
-
-    
     
     @IBAction func closeButtonTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
     
-    var mapLocation: MapLocation?  = nil {
+    var mapAnnotationObject: MapAnnotationObject?  = nil {
         didSet {
-            nameLabel.text = mapLocation?.title
-            distanceLabel.text = String(format:"%@: %d", "distanceLabel".localized, mapLocation?.distance ?? 0)
-            if (mapLocation?.rating == nil || mapLocation?.rating == 0) {
-                ratingLabel.isHidden = true
-            }else {
-                ratingLabel.text = String(format:"%@: %.1f", "ratingLabel".localized, mapLocation?.rating ?? 0.0)
+            guard let mapAnnotationObject = mapAnnotationObject else {
+                return
             }
-            openingHoursLabel.text = String(format: "%@: %@", "openingHoursLabel".localized, mapLocation?.openingHours ?? "")
-            phoneLabel.text = String(format: "%@: %@", "phoneNumberLabel".localized, mapLocation?.phone ?? "")
+            updateUI(mapAnnotationObject: mapAnnotationObject)
         }
     }
 
@@ -47,13 +39,24 @@ class PlaceDetailsViewControlelr: UIViewController {
         initUI()
     }
     
+    func updateUI(mapAnnotationObject: MapAnnotationObject) {
+        nameLabel.text = mapAnnotationObject.title
+        distanceLabel.text = String(format:"%@: %d", "distanceLabel".localized, mapAnnotationObject.distance ?? 0)
+        if (mapAnnotationObject.rating == nil || mapAnnotationObject.rating == 0) {
+            ratingLabel.isHidden = true
+        }else {
+            ratingLabel.text = String(format:"%@: %.1f", "ratingLabel".localized, mapAnnotationObject.rating ?? 0.0)
+        }
+        openingHoursLabel.text = String(format: "%@: %@", "openingHoursLabel".localized, mapAnnotationObject.openingHours ?? "")
+        phoneLabel.text = String(format: "%@: %@", "phoneNumberLabel".localized, mapAnnotationObject.phone ?? "")
+    }
+    
     func initUI() {
         view.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         popUpView.setRoundedCorners(cornerRadius: 8)
         
         dismissButton.imageView?.image = UIImage(named: "xmark.circle.fill")
         dismissButton.tintColor = AppColors.MainButtonsBackgroundColor
-        
         
         nameLabel.font = UIFont.boldSystemFont(ofSize: 16)
         distanceLabel.font = UIFont.systemFont(ofSize: 14)
@@ -64,20 +67,12 @@ class PlaceDetailsViewControlelr: UIViewController {
         openingHoursLabel.textColor = AppColors.SecondaryTextColor
         phoneLabel.font = UIFont.systemFont(ofSize: 14)
         phoneLabel.textColor = AppColors.SecondaryTextColor
-
         
         let gestureRecognizer = UITapGestureRecognizer(target: self,
                                            action: #selector(closeButtonTapped))
         gestureRecognizer.cancelsTouchesInView = false
         gestureRecognizer.delegate = self
         view.addGestureRecognizer(gestureRecognizer)
-
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-      super.init(coder: aDecoder)
-        modalTransitionStyle = .crossDissolve
-        modalPresentationStyle = .overFullScreen
     }
 }
 
