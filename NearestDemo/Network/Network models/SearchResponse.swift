@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import MapKit
+
 struct SearchResponse: Codable {
     var results: SearchResults?
 }
@@ -28,6 +30,11 @@ struct SearchResultItem: Codable {
     var id: String?
     var openingHours: SearchResultOpeningHours?
     var alternativeNames: [AlternativeNames]?
+    
+    var coordinates : CLLocationCoordinate2D? {
+        guard let latitude = position?.first, let longitude = position?.last else {return nil}
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
 }
 
 struct SearchResultCategory: Codable {

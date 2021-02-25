@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,5 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         return true
     }
+    
+    lazy var persistentContainer: NSPersistentContainer = {
+          let container = NSPersistentContainer(name: "Model")
+          container.loadPersistentStores { description, error in
+              if let error = error {
+                  fatalError("Unable to load persistent stores: \(error)")
+              }
+          }
+          return container
+      }()
 }
 
