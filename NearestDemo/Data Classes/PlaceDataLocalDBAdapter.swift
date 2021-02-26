@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+/// This class is an adapter (wrapper) to help store custom attributes -non premitive- of "Place Data" in Core data, this class implements encode function to store them.
 public class PlaceDataLocalDBAdapter: NSObject, NSCoding {
     
     public var longitude: Double
@@ -73,6 +73,7 @@ public class PlaceDataLocalDBAdapter: NSObject, NSCoding {
     
 }
 
+/// This class is an adapter (wrapper) to help store custom attributes -non premitives- of "Place Alternative Names" in Core data, this class implements encode function to store them.
 public class PlaceAlternativeNamesLocalDBAdapter: NSObject, NSCoding {
     public var alternativeNames: [PlaceAlternativeNameLocalDBAdapter]?
     enum EncodingKeys: String {
@@ -93,6 +94,7 @@ public class PlaceAlternativeNamesLocalDBAdapter: NSObject, NSCoding {
     
 }
 
+/// This class is an adapter (wrapper) to help store custom attributes -non premitives- of "Place Alternative Name" in Core data, this class implements encode function to store them.
 public class PlaceAlternativeNameLocalDBAdapter: NSObject, NSCoding {
     
     public var name: String?

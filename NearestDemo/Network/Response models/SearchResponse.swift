@@ -8,6 +8,7 @@
 import Foundation
 import MapKit
 
+///This is the search response upper level class, this class is built according to the response coming back from the places API.
 struct SearchResponse: Codable {
     var results: SearchResults?
 }
@@ -16,6 +17,7 @@ struct SearchResults: Codable {
     var items: [SearchResultItem]?
 }
 
+///This is the search result item response class, this class represents a single place nearby on the map and has all the information that is returned from the backend stored in it.
 struct SearchResultItem: Codable {
     var position: [Double]?
     var distance: Int?

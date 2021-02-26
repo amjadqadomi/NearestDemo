@@ -1,5 +1,5 @@
 //
-//  AppStoryBoard.swift
+//  AppStoryboard.swift
 //  NearestDemo
 //
 //  Created by Amjad on 2/25/21.
@@ -8,10 +8,9 @@
 import Foundation
 import UIKit
 
+/// this Enum has all the storyboards inside the app, you should add any new storyboards you create here
 enum AppStoryboard : String {
-    
-    /*****  Add new storyboard name here  case Main, Login , Profile  ******/
-    
+        
     case Main
     
     var instance : UIStoryboard {
@@ -45,6 +44,9 @@ extension UIViewController {
         return "\(self)"
     }
     
+    /// this static method instantiates a view controller from its class name but it should has the storyboard id set the same as the class name
+    /// - Parameters:
+    /// - fromAppStoryboard: `AppStoryboard` the storyboard from which this view controller will be created
     static func instantiate(fromAppStoryboard appStoryboard: AppStoryboard) -> Self {
         
         return appStoryboard.viewController(viewControllerClass: self)

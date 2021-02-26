@@ -29,7 +29,7 @@
 		959EBC7C25E7B46F00708C66 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 959EBC7A25E7B46F00708C66 /* Model.xcdatamodeld */; };
 		959EBC8125E7B5A100708C66 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959EBC8025E7B5A100708C66 /* CoreDataManager.swift */; };
 		959EBC9C25E7E22100708C66 /* PlaceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959EBC9B25E7E22100708C66 /* PlaceDetailsViewController.swift */; };
-		959EBCA125E7E79D00708C66 /* AppStoryBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959EBCA025E7E79D00708C66 /* AppStoryBoard.swift */; };
+		959EBCA125E7E79D00708C66 /* AppStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959EBCA025E7E79D00708C66 /* AppStoryboard.swift */; };
 		959EBCEC25E8F42D00708C66 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959EBCEB25E8F42D00708C66 /* MapViewModel.swift */; };
 		959EBCF125E9047000708C66 /* TestCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959EBCF025E9047000708C66 /* TestCoreData.swift */; };
 /* End PBXBuildFile section */
@@ -84,7 +84,7 @@
 		959EBC7B25E7B46F00708C66 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		959EBC8025E7B5A100708C66 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		959EBC9B25E7E22100708C66 /* PlaceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsViewController.swift; sourceTree = "<group>"; };
-		959EBCA025E7E79D00708C66 /* AppStoryBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoryBoard.swift; sourceTree = "<group>"; };
+		959EBCA025E7E79D00708C66 /* AppStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoryboard.swift; sourceTree = "<group>"; };
 		959EBCEB25E8F42D00708C66 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		959EBCF025E9047000708C66 /* TestCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreData.swift; sourceTree = "<group>"; };
 		A7C7F51146009BF29066779B /* Pods_NearstDemo_NearstDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NearstDemo_NearstDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -203,7 +203,7 @@
 				959EBC4125E6F1B400708C66 /* Extensions.swift */,
 				959EBC6025E786B700708C66 /* Resources.swift */,
 				959EBC8025E7B5A100708C66 /* CoreDataManager.swift */,
-				959EBCA025E7E79D00708C66 /* AppStoryBoard.swift */,
+				959EBCA025E7E79D00708C66 /* AppStoryboard.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -212,17 +212,17 @@
 			isa = PBXGroup;
 			children = (
 				959EBC0625E6E61200708C66 /* NetworkUtils.swift */,
-				959EBC1B25E6E7B000708C66 /* Network models */,
+				959EBC1B25E6E7B000708C66 /* Response models */,
 			);
 			path = Network;
 			sourceTree = "<group>";
 		};
-		959EBC1B25E6E7B000708C66 /* Network models */ = {
+		959EBC1B25E6E7B000708C66 /* Response models */ = {
 			isa = PBXGroup;
 			children = (
 				959EBC2425E6E8ED00708C66 /* SearchResponse.swift */,
 			);
-			path = "Network models";
+			path = "Response models";
 			sourceTree = "<group>";
 		};
 		959EBC3125E6EF9100708C66 /* Localization */ = {
@@ -497,7 +497,7 @@
 				959EBBD125E6E24600708C66 /* MapViewController.swift in Sources */,
 				959EBC6625E78AF000708C66 /* PlaceAnnotationObject.swift in Sources */,
 				959EBC2525E6E8ED00708C66 /* SearchResponse.swift in Sources */,
-				959EBCA125E7E79D00708C66 /* AppStoryBoard.swift in Sources */,
+				959EBCA125E7E79D00708C66 /* AppStoryboard.swift in Sources */,
 				959EBC0725E6E61200708C66 /* NetworkUtils.swift in Sources */,
 				959EBC1D25E6E84E00708C66 /* LocationObject.swift in Sources */,
 				959EBC6125E786B700708C66 /* Resources.swift in Sources */,

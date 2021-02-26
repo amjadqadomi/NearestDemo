@@ -15,8 +15,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var mapView: MKMapView!
     
-    var mapViewModel = MapViewModel()
-    
+    var mapViewModel = MapViewModel()// the model which holds all the data
     
     @IBAction func searchButtonTapped(_ sender: UIButton) {
         guard let searchText = searchTextField.text, !searchText.isEmpty else {
@@ -49,14 +48,14 @@ class MapViewController: UIViewController {
         
         searchTextField.placeholder = "searchHere".localized
         searchTextField.delegate = self
-
     }
     
     func handleEmptySearchText() {
         searchTextField.shake()
     }
     
-    func enterLodingState() {
+    /// this function shows loading UI and blocks user interactions
+    private func enterLodingState() {
         self.mapView.isUserInteractionEnabled = false
         let alert = UIAlertController(title: nil, message: "loading".localized, preferredStyle: .alert)
 
@@ -74,7 +73,8 @@ class MapViewController: UIViewController {
 
     }
     
-    func exitLodingState() {
+    /// this function hides loading UI
+    private func exitLodingState() {
         self.mapView.isUserInteractionEnabled = true
         dismiss(animated: true, completion: nil)
     }

@@ -9,6 +9,7 @@ import Foundation
 import CoreLocation
 import MapKit
 
+///This class holds information of the location 
 public class LocationObject: NSObject {
     public var name: String?
     

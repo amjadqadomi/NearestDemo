@@ -8,20 +8,27 @@
 import Foundation
 import UIKit
 extension String {
+    ///this attribute return a localized version of the string based on the key
     var localized: String {
         return NSLocalizedString(self, comment: "")
     }
 }
 
 extension UIView {
+    ///this function sets rounded corners for the view
+    /// - Parameters:
+    /// - cornerRadius: `CGFloat` the radius in which the view's corners should be curved
     func setRoundedCorners(cornerRadius:CGFloat) {
         self.clipsToBounds = true
         self.layer.cornerRadius = cornerRadius
     }
+    
+    ///this function sets circled corners for the view
     func setCircledCorners() {
         setRoundedCorners(cornerRadius: self.frame.size.width * 0.5)
     }
     
+    ///this function shakes the view horizontally for 0.6 seconds
     func shake() {
         let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
         animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
@@ -32,6 +39,7 @@ extension UIView {
 }
 
 extension UITextField {
+    ///this function shakes the view horizontally and shows a red place holder inside the text field
     func showRedAlertAndShake() {
         self.text = ""
         let generator = UIImpactFeedbackGenerator(style: .medium)
@@ -45,6 +53,7 @@ extension UITextField {
             generator.impactOccurred()
         }
     }
+    ///this function checks if the text inside the text field is empty or not
     func isTextFieldEmptyWithNoWhiteSpaces()->Bool {
         if let text = self.text {
             return text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
@@ -53,14 +62,16 @@ extension UITextField {
     }
 }
 extension Dictionary where Key == String {
+    ///this function checks if the dictionary has a certain key in it or not
+    /// - Parameters:
+    /// - key: `String` the key to check for
     func hasKey(key:String)-> Bool{
         return self[key] != nil
     }
 }
 
 extension UIColor {
-    // MARK: - Convenience Methods
-    
+    ///this attribute returns the hex value of the color as a String
     var toHex: String? {
         // Extract Components
         guard let components = cgColor.components, components.count >= 3 else {
@@ -83,8 +94,9 @@ extension UIColor {
         return hex
     }
     
-    // MARK: - Initialization
-    
+    ///this init function takes the color value as a hex String and initializes a UIColor object with its value
+    /// - Parameters:
+    /// - hex: `String` the color value in Hexadecimal String. eg: #FFFFFF
     convenience init?(hex: String) {
         var hexNormalized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
         hexNormalized = hexNormalized.replacingOccurrences(of: "#", with: "")
@@ -116,24 +128,5 @@ extension UIColor {
         }
         
         self.init(red: r, green: g, blue: b, alpha: a)
-    }
-    func rgb() -> Int? {
-        var fRed : CGFloat = 0
-        var fGreen : CGFloat = 0
-        var fBlue : CGFloat = 0
-        var fAlpha: CGFloat = 0
-        if self.getRed(&fRed, green: &fGreen, blue: &fBlue, alpha: &fAlpha) {
-            let iRed = Int(fRed * 255.0)
-            let iGreen = Int(fGreen * 255.0)
-            let iBlue = Int(fBlue * 255.0)
-            let iAlpha = Int(fAlpha * 255.0)
-            
-            //  (Bits 24-31 are alpha, 16-23 are red, 8-15 are green, 0-7 are blue).
-            let rgb = (iAlpha << 24) + (iRed << 16) + (iGreen << 8) + iBlue
-            return rgb
-        } else {
-            // Could not extract RGBA components:
-            return nil
-        }
     }
 }

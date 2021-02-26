@@ -9,14 +9,29 @@ import Foundation
 import CoreLocation
 
 protocol MapViewModelDelegate: AnyObject {
+    ///this method notifies the delegate that there has been a location update
+    /// - Parameter currentLocation: `LocationObject?` the latest location update
     func updatedLocation(currentLocation: LocationObject?)
+    ///this method notifies the delegate that it started fetching data to show appropiate loading UI
     func startedFetchingPlaces()
+    ///this method notifies the delegate that it finished fetching data to hide loading UI
     func finishedFetchingPlaces()
+    ///this method tells the delegate to show items on the map
+    ///- Parameters:
+    /// - placesData: `[PlaceDataEntity]` the places that should be shown on map in persistent storage format
+    /// - location: `LocationObject` the user's location
     func showItemsOnMapFromPersistantStore(placesData: [PlaceDataEntity], location: LocationObject)
+    ///this method tells the delegate to show items on the map
+    ///- Parameters:
+    /// - items: `[SearchResultItem]` the places that should be shown on map in response from server format
+    /// - location: `LocationObject?` the user's location
     func showItemsOnMapFromNetwork(items: [SearchResultItem], currentLocation: LocationObject?)
+    ///this method tells the delegate to show an error message to the user
+    /// - Parameter errorMessage: `String` the error message that should be displayed
     func errorFetchingPlaces(errorMessage: String)
 }
 
+///MapViewModel class is the class responsible for holding the data of the map view
 class MapViewModel: NSObject {
     
     weak var mapViewDelegate: MapViewModelDelegate?
@@ -64,7 +79,7 @@ class MapViewModel: NSObject {
         UserDefaults.standard.set(currentLocation?.coordinate.longitude, forKey: UserDefaultsKeys.lastUserLongitudeKey)
         UserDefaults.standard.set(currentLocation?.coordinate.latitude, forKey: UserDefaultsKeys.lastUserLatitudeKey)
     }
-    
+    ///this method calls the Places API for anticipated words the user will search for and caches the response to avoid loading UI
     func preCache() {
         for commonSearch in predictedCommonSearches {
             self.fetchPlacesFromServer(showLoading: false, searchText: commonSearch) { (items) in
@@ -76,6 +91,8 @@ class MapViewModel: NSObject {
         }
     }
     
+    ///this method calls fetches the Places API and searches for places around the user current location
+    /// - Parameter searchText: `String` the text which will be used to search for places around the user location
     func startSearch(searchText: String) {
         if (predictedCommonSearches.contains(searchText)) {
             if preCachedLocations.hasKey(key: searchText), let items = preCachedLocations[searchText] {
@@ -91,6 +108,7 @@ class MapViewModel: NSObject {
         }
     }
     
+    ///this method will check if the user had searched for places in the past by checking core data records and if so it will notify the delegate about these places to show them on the map
     func checkPresistantStore() {
         let oldPlacesData = coreDataManager.getPlace()
         if  oldPlacesData.count > 0 {
@@ -102,8 +120,13 @@ class MapViewModel: NSObject {
     }
     
     
-    
-    func fetchPlacesFromServer(showLoading: Bool = true, searchText: String, completionHandler: @escaping (_ items: [SearchResultItem])->(), networkIssue: @escaping (_ error: Error) -> Void) {
+    ///this method will fetch the places data from the Places API and notify the delegate
+    /// - Parameters:
+    /// - showLoading: `Bool` this parameter decides to show loading UI or not
+    /// - searchText: `String` the text which will be used to search for places around the user location
+    /// - completionHandler: `(_ items: [SearchResultItem])->()` the completion handler which will be called returning the fetched places once the fetch proccess is completed
+    /// - networkIssue: `(_ error: Error) -> Void` failure handler that will be called in case an error occures
+    private func fetchPlacesFromServer(showLoading: Bool = true, searchText: String, completionHandler: @escaping (_ items: [SearchResultItem])->(), networkIssue: @escaping (_ error: Error) -> Void) {
         if showLoading {
             mapViewDelegate?.startedFetchingPlaces()
         }

@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+///this struct contains color resources fetched from the assets folder
 struct AppColors {
     static let MainButtonsBackgroundColor = UIColor(named: "MainButtonsBackgroundColor")
     static let MainAppColor = UIColor(named: "MainAppColor")

@@ -7,7 +7,7 @@
 
 import Foundation
 import MapKit
-
+/// This custom class is a subclass of MKAnnotation which holds data to be shown on the map, this represnts a place object
 class PlaceAnnotationObject: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
     var title: String?
@@ -32,6 +32,7 @@ class PlaceAnnotationObject: NSObject, MKAnnotation {
 
 }
 
+/// This custom class is a subclass of MKAnnotation which holds data to be shown on the map, this represnts a user location object
 class UserLocationMapAnnotationObject: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
     var title: String?
