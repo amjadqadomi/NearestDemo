@@ -47,7 +47,8 @@ class PlaceDetailsViewControlelr: UIViewController {
         }else {
             ratingLabel.text = String(format:"%@: %.1f", "ratingLabel".localized, placeAnnotationObject.rating ?? 0.0)
         }
-        openingHoursLabel.text = String(format: "%@: %@", "openingHoursLabel".localized, placeAnnotationObject.openingHours ?? "")
+        let openingHoursCleaned = placeAnnotationObject.openingHours?.replacingOccurrences(of: "<br/>", with: ",")
+        openingHoursLabel.text = String(format: "%@: %@", "openingHoursLabel".localized, openingHoursCleaned ?? "")
         phoneLabel.text = String(format: "%@: %@", "phoneNumberLabel".localized, placeAnnotationObject.phone ?? "")
     }
     

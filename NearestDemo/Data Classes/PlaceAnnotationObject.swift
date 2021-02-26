@@ -15,19 +15,21 @@ class PlaceAnnotationObject: NSObject, MKAnnotation {
     var rating: Double?
     var openingHours: String?
     var phone: String?
+    var id: String?
     
     
-    init(title: String?, coordinate: CLLocationCoordinate2D, distance: Int?, rating: Double?, openingHours: String?, phone: String?) {
+    init(title: String?, coordinate: CLLocationCoordinate2D, distance: Int?, rating: Double?, openingHours: String?, phone: String?, id: String?) {
         self.title = title
         self.coordinate = coordinate
         self.distance = distance
         self.rating = rating
         self.openingHours = openingHours
         self.phone = phone
+        self.id = id
         super.init()
     }
     
-    
+
 }
 
 class UserLocationMapAnnotationObject: NSObject, MKAnnotation {

@@ -17,3 +17,6 @@
 "gas" = "كازية";
 "supermarket" = "سوبرماركت";
 "myLocation" = "موقعي";
+"generalError" = "حدث خطأ ما";
+"ok" = "حسنا";
+"tryAgain" = "يرجى المحاولة فيما بعد";

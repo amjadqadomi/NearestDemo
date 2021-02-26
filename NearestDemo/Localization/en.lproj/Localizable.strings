@@ -17,3 +17,6 @@
 "gas" = "gas";
 "supermarket" = "supermarket";
 "myLocation" = "My Location";
+"generalError" = "Something went wrong";
+"ok" = "Ok";
+"tryAgain" = "please try again later";
