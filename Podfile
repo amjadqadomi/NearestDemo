@@ -1,7 +1,7 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-target 'NearstDemo' do
+target 'NearestDemo' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
@@ -10,12 +10,12 @@ target 'NearstDemo' do
 
   # Pods for NearstDemo
 
-  target 'NearstDemoTests' do
+  target 'NearestDemoTests' do
     inherit! :search_paths
     # Pods for testing
   end
 
-  target 'NearstDemoUITests' do
+  target 'NearestDemoUITests' do
     # Pods for testing
   end
 
