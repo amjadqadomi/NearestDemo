@@ -33,10 +33,10 @@ class MapViewController: UIViewController {
         initUI()
         mapView.delegate = self
         mapViewModel.mapViewDelegate = self
-        mapViewModel.checkPresistantStore()
+        mapViewModel.checkPresistentStorage()
     }
     
-    func initUI() {
+    private func initUI() {
         self.view.backgroundColor = AppColors.MainAppColor
         searchButton.setTitle("searchButtonTitle".localized, for: .normal)
         searchButton.backgroundColor = AppColors.MainButtonsBackgroundColor
@@ -50,7 +50,7 @@ class MapViewController: UIViewController {
         searchTextField.delegate = self
     }
     
-    func handleEmptySearchText() {
+    private func handleEmptySearchText() {
         searchTextField.shake()
     }
     
@@ -161,44 +161,16 @@ extension MapViewController: MapViewModelDelegate {
         exitLodingState()
     }
     
-    func showItemsOnMapFromPersistantStore(placesData: [PlaceDataEntity], location: LocationObject) {
-        mapView.centerToLocation(location.coordinate)
-        mapView.addAnnotation(UserLocationMapAnnotationObject(title: "myLocation".localized, coordinate: location.coordinate))
+    func showPlacesOnMap(placesData: [PlaceDataLocalDBAdapter], location: LocationObject?) {
+        if let currentLocationCoordinates = location?.coordinate {
+            mapView.centerToLocation(currentLocationCoordinates)
+            mapView.addAnnotation(UserLocationMapAnnotationObject(title: "myLocation".localized, coordinate: currentLocationCoordinates))
+        }
         
         for placeData in placesData {
             let placeAnnotationObject = PlaceAnnotationObject.init(title: placeData.title, coordinate: CLLocationCoordinate2D(latitude: placeData.latitude, longitude: placeData.longitude), distance: Int(placeData.distance), rating: placeData.averageRating, openingHours: placeData.openingHours, phone: placeData.phoneNumber, id: placeData.id)
             self.mapView.addAnnotation(placeAnnotationObject)
         }
-    }
-    
-    func showItemsOnMapFromNetwork(items: [SearchResultItem], currentLocation: LocationObject?) {
-        if let currentLocationCoordinates = currentLocation?.coordinate {
-            mapView.centerToLocation(currentLocationCoordinates)
-            mapView.addAnnotation(UserLocationMapAnnotationObject(title: "myLocation".localized, coordinate: currentLocationCoordinates))
-        }
-        var placesData = [PlaceDataLocalDBAdapter]()
-        for item in items {
-            if let longitude = item.coordinates?.longitude, let latitude = item.coordinates?.latitude, let title = item.title, let id = item.id, let coordinates = item.coordinates {
-               
-                let placeAnnotationObject = PlaceAnnotationObject.init(title: title, coordinate: coordinates, distance: item.distance, rating:  item.averageRating, openingHours: item.openingHours?.text, phone: item.contacts?.phone?.first?.value, id: item.id)
-                self.mapView.addAnnotation(placeAnnotationObject)
-                
-                var placesAlternativeNames = [PlaceAlternativeNameLocalDBAdapter]()
-                if let alternativeNames = item.alternativeNames {
-                    for alternativeName in alternativeNames {
-                        let placeAlternativeName = PlaceAlternativeNameLocalDBAdapter(name: alternativeName.name, language: alternativeName.language)
-                        placesAlternativeNames.append(placeAlternativeName)
-                    }
-                }
-               
-                let storableAlternativeNamesObject = PlaceAlternativeNamesLocalDBAdapter(alternativeNames: placesAlternativeNames)
-                let placeData = PlaceDataLocalDBAdapter(longitude: longitude, latitude: latitude, distance: item.distance ?? 0, title: title, averageRating: item.averageRating ?? 0, id: id, phoneNumber: item.contacts?.phone?.first?.value, openingHours: item.openingHours?.text, alternativeNames: storableAlternativeNamesObject)
-                placesData.append(placeData)
-            }
-        }
-        
-        mapViewModel.savePlacesDataToPersistantStore(placesData: placesData)
-        mapViewModel.saveLastLocationToPersistantStorage()
     }
     
     func errorFetchingPlaces(errorMessage: String) {

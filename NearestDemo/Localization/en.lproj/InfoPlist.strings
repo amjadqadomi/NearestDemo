@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  NearestDemo
+
+  Created by Amjad on 2/28/21.
+  
+*/
+CFBundleDisplayName = "Nearest Locations";
+NSLocationWhenInUseUsageDescription = "Nearest Locations needs to access your location to show the nearest places";

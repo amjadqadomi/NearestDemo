@@ -10,46 +10,63 @@ import UIKit
 import CoreData
 
 class CoreDataManager {
-    enum StorageType {
-      case persistent, inMemory
-    }
+    
+    /// storeType defines if we are using the memory for storage or the persistent documents
+    /// the NSInMemoryStoreType will be used for unit testing so the testing data would not persist and affect the flow
+    
     private var storeType: String = NSSQLiteStoreType
+    
+    lazy var persistentContainer: NSPersistentContainer! = {
+        let persistentContainer = NSPersistentContainer(name: "Model")
+        let description = persistentContainer.persistentStoreDescriptions.first
+        description?.type = storeType
+        
+        return persistentContainer
+    }()
+    
+    ///singlton instance of CoreDataManager
+    static let shared = CoreDataManager()
+    
+    ///sets up the core data manager with the correct store type
+    /// - Parameters:
+    /// - storeType: `String` store type on which the data will be written, most common values are  NSSQLiteStoreType, NSInMemoryStoreType.
+    /// - completion: `() -> Void`the completion handler that should be called once the store is set up.
 
-        lazy var persistentContainer: NSPersistentContainer! = {
-            let persistentContainer = NSPersistentContainer(name: "Model")
-            let description = persistentContainer.persistentStoreDescriptions.first
-            description?.type = storeType
-
-            return persistentContainer
-        }()
-
-        static let shared = CoreDataManager()
-
-        func setup(storeType: String = NSSQLiteStoreType, completion: (() -> Void)?) {
-            self.storeType = storeType
-
-            loadPersistentStore {
-                completion?()
-            }
+    func setup(storeType: String = NSSQLiteStoreType, completion: (() -> Void)?) {
+        self.storeType = storeType
+        
+        loadPersistentStore {
+            completion?()
         }
-
-        private func loadPersistentStore(completion: @escaping () -> Void) {
-            persistentContainer.loadPersistentStores { description, error in
-                guard error == nil else {
-                    fatalError("was unable to load store \(error!)")
-                }
-
-                completion()
+    }
+    
+    ///loads the persistent store
+    /// - Parameters:
+    /// - completion: `() -> Void`the completion handler that should be called once the store is loaded
+    private func loadPersistentStore(completion: @escaping () -> Void) {
+        persistentContainer.loadPersistentStores { description, error in
+            guard error == nil else {
+                fatalError("was unable to load store \(error!)")
             }
+            
+            completion()
         }
+    }
     
     
-     func savePlaces (places: [PlaceDataLocalDBAdapter]) {
+    ///saves places to core data
+    /// - Parameters:
+    /// - places: `[PlaceDataLocalDBAdapter]` the places that should be saved to core data
+    func savePlaces (places: [PlaceDataLocalDBAdapter]) {
         for place in places {
             savePlace(place: place)
         }
     }
     
+    ///saves places to core data
+    /// - Parameters:
+    /// - places: `[PlaceDataLocalDBAdapter]` the places that should be saved to core data
+    /// - Returns:`PlaceDataEntity?` the saved place in core data
     @discardableResult
     func savePlace(place: PlaceDataLocalDBAdapter) -> PlaceDataEntity? {
         let managedObjectContext = persistentContainer.viewContext
@@ -64,15 +81,17 @@ class CoreDataManager {
         placeDataEntity.distance = Int32(place.distance)
         placeDataEntity.alternativeNames = place.alternativeNames
         do {
-          try managedObjectContext.save()
-          return placeDataEntity
+            try managedObjectContext.save()
+            return placeDataEntity
         } catch let error as NSError {
-          print("Could not save. \(error), \(error.userInfo)")
-          return nil
+            print("Could not save. \(error), \(error.userInfo)")
+            return nil
         }
     }
     
-    func getPlace() -> [PlaceDataEntity] {
+    ///get latest saved places from core data
+    /// - Returns:`[PlaceDataEntity]` the saved places in core data
+    func getLatestPlaces() -> [PlaceDataEntity] {
         let managedObjectContext = persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<PlaceDataEntity> = PlaceDataEntity.fetchRequest()
         fetchRequest.sortDescriptors = []
@@ -94,20 +113,24 @@ class CoreDataManager {
         return []
     }
     
+    ///deletes all places from core data
     func deleteAllPlaces() {
         let managedObjectContext = persistentContainer.viewContext
         let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "PlaceDataEntity")
         let request = NSBatchDeleteRequest(fetchRequest: fetch)
-
+        
         do {
             try managedObjectContext.execute(request)
-
+            
         } catch let error as NSError {
             print("Could not delete records  \(error)")
         }
-
+        
     }
     
+    ///get a saved place from core data
+    /// - Parameters:
+    /// - places: `PlaceDataLocalDBAdapter` the places that should be deleted from core data
     func deletePlace(place : PlaceDataEntity){
         let managedObjectContext = persistentContainer.viewContext
         managedObjectContext.delete(place)
